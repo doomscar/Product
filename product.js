@@ -1,44 +1,20 @@
-function Product() {
-  let typeis = "";
-  let priceis = 0;
-  let nameis = "";
-  return {
-    type: (t) => typeis = t,
-    price: (p) => priceis = p,
-    name: (n) => nameis = n
-  }
+function Product(type, name, price) {
+  return {type, name, price}
 }
 
 function ProductManager() {
   let products = [];
   return {
     add: (product) => products.push(product),
-    getAll: () => products,
-    remove: (name) => {for (let i = 0; i<products.length; i++){
-      if(products[i].name === name){
-        products.splice(i,1);
-      }
-    }
-    },
+    getAll: () => products.slice(),
+    remove: (name) => {products.find((element, index, array) => {if (element.name === name){return array.splice(index,1);}})},
     removeAll: () => products = []
   }
 }
 
-const product1 = Product(); // Капуста
-const product2 = Product(); // Брюква
-const product3 = Product(); // Яблоки
-
-product1.type = "Овощи";
-product1.price = 1000;
-product1.name = "Капуста";
-
-product2.type = "Овощи";
-product2.price = 100;
-product2.name = "Брюква";
-
-product3.type = "Фрукты";
-product3.price = 500;
-product3.name = "Яблоки";
+const product1 = Product("Овощи", "Капуста", 1000); // Капуста
+const product2 = Product("Овощи", "Брюква", 100); // Брюква
+const product3 = Product("Фрукты", "Яблоки", 500); // Яблоки
 
 const Prod = ProductManager();
 
@@ -50,4 +26,4 @@ Prod.add(product3);
 
 //console.log(Prod.removeAll());
 
-//console.log(Prod.getAll());
+console.log(Prod.getAll());
