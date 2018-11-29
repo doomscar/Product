@@ -7,7 +7,13 @@ function ProductManager() {
   return {
     add: (product) => products.push(product),
     getAll: () => products.slice(),
-    remove: (name) => {products.find((element, index, array) => {if (element.name === name){return array.splice(index,1);}})},
+    remove: function (name) {
+      for(let i=0;i<products.length;i++){
+        if(products[i].name === name){
+          products.splice(i,1);
+        }
+      }
+    },
     removeAll: () => products = []
   }
 }
